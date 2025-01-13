@@ -16,10 +16,30 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    private void showAddActivityDialog() {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View dialogView = inflater.inflate(R.layout.dialog_add_activity, null);
+
+        EditText editTextActivityDescription = dialogView.findViewById(R.id.editTextActivityDescription);
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Adicionar Atividade")
+                .setView(dialogView)
+                .setPositiveButton("Adicionar", (dialog, which) -> {
+                    String description = editTextActivityDescription.getText().toString().trim();
+                    if (!description.isEmpty()) {
+                        // Salvar a atividade no banco de dados
+                        atividadeDao.inserirAtividade(description);
+
+                        // Atualizar a lista no RecyclerView
+                        atualizarLista();
+
+                        Toast.makeText(getContext(), "Atividade adicionada: " + description, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Por favor, insira uma descrição.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 }
