@@ -23,66 +23,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="30dp"
-                    android:text="Olá, Matheus">
-                </TextView>
+                    android:text="Olá, Matheus"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18dp"
-                    android:text="Como está o seu humor hoje?">
-                </TextView>
+                    android:text="Como está o seu humor hoje?"/>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <com.google.android.material.card.MaterialCardView
+        <!-- Botão para adicionar atividades -->
+        <Button
+            android:id="@+id/btnAdicionarAtividades"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:checkable="true">
+            android:text="Adicionar Atividades"
+            android:layout_marginBottom="16dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fazer Exercícios Físicos"
-                android:padding="16dp"/>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
+        <!-- RecyclerView para listar as atividades -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewAtividades"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:checkable="true">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="8dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fazer Atividades da Faculdade"
-                android:padding="16dp"/>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:checkable="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lavar Roupas"
-                android:padding="16dp"/>
-        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
