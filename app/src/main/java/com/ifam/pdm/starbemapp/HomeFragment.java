@@ -1,19 +1,45 @@
 package com.ifam.pdm.starbemapp;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
 
+    private AtividadeDao atividadeDao;
+    private RecyclerView recyclerView;
+    private AtividadeAdapter adapter;
+
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        atividadeDao = new AtividadeDao(getContext());
+
+        recyclerView = view.findViewById(R.id.recyclerViewAtividades);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        atualizarLista();
+
+        Button btnAdicionarAtividades = view.findViewById(R.id.btnAdicionarAtividades);
+        btnAdicionarAtividades.setOnClickListener(v -> showAddActivityDialog());
+
+        return view;
     }
 
     private void showAddActivityDialog() {
@@ -41,5 +67,12 @@ public class HomeFragment extends Fragment {
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
+    }
+
+
+    private void atualizarLista() {
+        List<String> atividades = atividadeDao.listarAtividades();
+        adapter = new AtividadeAdapter(atividades, getContext());
+        recyclerView.setAdapter(adapter);
     }
 }
