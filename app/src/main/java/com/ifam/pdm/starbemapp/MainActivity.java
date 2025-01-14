@@ -3,58 +3,55 @@ package com.ifam.pdm.starbemapp;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener  {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.flFragment, new HomeFragment())
-                    .commit();
-        }
-
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        // Configurar a barra de navegação inferior
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.home);
-    }
 
-    HomeFragment homeFragment = new HomeFragment();
-    HistoricoFragment historicoFragment = new HistoricoFragment();
+        // Carregar o fragmento inicial
+        if (savedInstanceState == null) {
+            loadFragment(new HomeFragment());
+        }
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment selectedFragment = null;
 
         switch (item.getItemId()) {
-            case R.id.home:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.flFragment, homeFragment)
-                        .commit();
-                return true;
-
-            case R.id.history:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.flFragment, historicoFragment)
-                        .commit();
-                return true;
+            case R.id.bottom_home:
+                selectedFragment = new HomeFragment();
+                break;
+            case R.id.bottom_grafic:
+                selectedFragment = new HistoricoFragment();
+                break;
         }
 
+        if (selectedFragment != null) {
+            return loadFragment(selectedFragment);
+        }
         return false;
+    }
+
+    private boolean loadFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.flFragment, fragment)
+                .commit();
+        return true;
     }
 }
