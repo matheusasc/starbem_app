@@ -28,13 +28,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="30dp"
+                    android:textColor="@color/black"
                     android:text="Olá, Matheus"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18dp"
+                    android:textColor="@color/black"
                     android:text="Como está o seu humor hoje?"/>
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="90dp"
+                        android:src="@drawable/emoji_happy" />
+
+                    <ImageView
+                        android:layout_width="95dp"
+                        android:layout_height="148dp"
+                        android:src="@drawable/emoji_crying" />
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="62dp"
+                        android:src="@drawable/emoji_angry" />
+                </LinearLayout>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
