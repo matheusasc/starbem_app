@@ -8,79 +8,108 @@
     android:id="@+id/main"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+    <View
+        android:id="@+id/containerComponents"
+        style="@style/containerComponents"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="100px">
+    <TextView
+        android:id="@+id/Saudacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Olá, Matheus"
+        android:textColor="#000000"
+        android:textSize="38sp"
+        app:layout_constraintStart_toStartOf="@+id/containerComponents"
+        app:layout_constraintTop_toTopOf="@+id/containerComponents" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+    <TextView
+        android:id="@+id/Pergunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="88dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Como está seu humor hoje?"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/containerComponents"
+        app:layout_constraintTop_toTopOf="@+id/containerComponents" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="30dp"
-                    android:textColor="@color/black"
-                    android:text="Olá, Matheus"/>
+    <ImageButton
+        android:id="@+id/felicidade"
+        style="@style/emoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Selecionar Felicidade"
+        app:layout_constraintStart_toStartOf="@+id/containerComponents"
+        app:layout_constraintTop_toTopOf="@+id/containerComponents"
+        app:srcCompat="@drawable/sorriso" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:textColor="@color/black"
-                    android:text="Como está o seu humor hoje?"/>
+    <ImageButton
+        android:id="@+id/tristeza"
+        style="@style/emoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Selecionar Tristeza"
+        app:layout_constraintStart_toEndOf="@+id/felicidade"
+        app:layout_constraintTop_toTopOf="@+id/containerComponents"
+        app:srcCompat="@drawable/soluco" />
 
-                <LinearLayout
+    <ImageButton
+        android:id="@+id/nervoso"
+        style="@style/emoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Selecionar Raiva"
+        app:layout_constraintStart_toEndOf="@+id/tristeza"
+        app:layout_constraintTop_toTopOf="@+id/containerComponents"
+        app:srcCompat="@drawable/nervoso" />
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+    <ImageButton
+        android:id="@+id/btnAdicionarAtividades"
+        style="@style/buttonAtividade"
+        android:layout_width="44dp"
+        android:layout_height="41dp"
+        android:contentDescription="Adicionar Atividade"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containerComponents"
+        app:srcCompat="@drawable/baseline_add_24" />
 
-                    <ImageView
-                        android:layout_width="55dp"
-                        android:layout_height="90dp"
-                        android:src="@drawable/emoji_happy" />
+    <TextView
+        android:id="@+id/textButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Adicionar Atividades"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/btnAdicionarAtividades"
+        app:layout_constraintTop_toBottomOf="@+id/containerComponents" />
 
-                    <ImageView
-                        android:layout_width="95dp"
-                        android:layout_height="148dp"
-                        android:src="@drawable/emoji_crying" />
+    <!-- RecyclerView para listar as atividades -->
 
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="62dp"
-                        android:src="@drawable/emoji_angry" />
-                </LinearLayout>
-            </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAtividades"
+        android:layout_width="360dp"
+        android:layout_height="265dp"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdicionarAtividades"
+        tools:layout_conversion_absoluteHeight="385dp"
+        tools:layout_conversion_absoluteWidth="379dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- Botão para adicionar atividades -->
-        <Button
-            android:id="@+id/btnAdicionarAtividades"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Adicionar Atividades"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- RecyclerView para listar as atividades -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewAtividades"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="8dp" />
-
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
