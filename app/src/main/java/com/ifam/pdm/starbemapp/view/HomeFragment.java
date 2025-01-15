@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ifam.pdm.starbemapp.adapter.AtividadeAdapter;
+import com.ifam.pdm.starbemapp.model.AtividadeDao;
+
 import java.util.List;
 
 
