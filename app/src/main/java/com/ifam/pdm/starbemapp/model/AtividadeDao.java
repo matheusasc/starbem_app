@@ -39,7 +39,6 @@ public class AtividadeDao {
                 String descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
                 int concluidaInt = cursor.getInt(cursor.getColumnIndexOrThrow("concluida"));
 
-                // Converte o valor para booleano (true se 1, false se 0)
                 boolean concluida = (concluidaInt == 1);
 
                 Atividade atividade = new Atividade(id, descricao, concluida);
@@ -68,7 +67,6 @@ public class AtividadeDao {
 
 
     public void alternarEstadoConcluida(int id) {
-        // Primeiro, obtemos o valor atual de 'concluida' da atividade
         Cursor cursor = db.rawQuery("SELECT concluida FROM atividade WHERE id = ?", new String[]{String.valueOf(id)});
         boolean concluida = false;
 
@@ -79,7 +77,7 @@ public class AtividadeDao {
 
         // Alterna o estado
         ContentValues valores = new ContentValues();
-        valores.put("concluida", concluida ? 0 : 1);  // Se for 1 (concluída), setamos para 0 (não concluída), e vice-versa
+        valores.put("concluida", concluida ? 0 : 1);
 
         db.update("atividade", valores, "id = ?", new String[]{String.valueOf(id)});
     }

@@ -40,7 +40,6 @@ public class HomeFragment extends Fragment {
 
         atualizarLista();
 
-        // Alteração: Aqui você deve usar ImageButton em vez de Button
         ImageButton btnAdicionarAtividades = view.findViewById(R.id.btnAdicionarAtividades);
         btnAdicionarAtividades.setOnClickListener(v -> showAddActivityDialog());
 
@@ -61,10 +60,8 @@ public class HomeFragment extends Fragment {
                     String description = editTextActivityDescription.getText().toString().trim();
                     if (!description.isEmpty()) {
                         boolean concluida = false;
-                        // Salvar a atividade no banco de dados
                         atividadeDao.inserirAtividade(description, concluida);
 
-                        // Atualizar a lista no RecyclerView
                         atualizarLista();
 
                         Toast.makeText(getContext(), "Atividade adicionada: " + description, Toast.LENGTH_SHORT).show();

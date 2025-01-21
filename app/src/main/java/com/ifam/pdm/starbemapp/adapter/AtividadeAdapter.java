@@ -48,25 +48,17 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.Ativ
         final Atividade atividade = atividades.get(position);
         holder.txtDescricao.setText(atividade.getDescricao());
 
-        // Configura o listener do checkbox
-        holder.checkboxAtividade.setChecked(atividade.isConcluida());  // Certifica-se de que o estado do checkbox está correto
-
+        holder.checkboxAtividade.setChecked(atividade.isConcluida());
         holder.checkboxAtividade.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // Quando o checkbox é alterado, chama o método para alternar o estado
             AtividadeDao dao = new AtividadeDao(context);
-            dao.alternarEstadoConcluida(atividade.getId()); // Passa o ID da atividade que foi marcada/desmarcada
+            dao.alternarEstadoConcluida(atividade.getId());
             dao.marcarComoConcluida(atividade.getId(), isChecked);
-            // Ao marcar o checkbox
             if (isChecked) {
-
-                // Riscando o texto e alterando a cor para cinza
                 holder.txtDescricao.setTextColor(Color.GRAY);
                 holder.txtDescricao.setPaintFlags(holder.txtDescricao.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 holder.cardAtividade.setCardBackgroundColor(Color.parseColor("#D3D3D3"));
                 holder.cardAtividade.setAlpha(0.5f);
             } else {
-
-                // Removendo o risco do texto e voltando à cor original
                 holder.txtDescricao.setTextColor(Color.BLACK);
                 holder.txtDescricao.setPaintFlags(holder.txtDescricao.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                 holder.cardAtividade.setCardBackgroundColor(Color.parseColor("#BBDB9B"));
@@ -75,13 +67,10 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.Ativ
 
         });
 
-        // Configura o listener para o ícone de edição
         holder.iconEdit.setOnClickListener(v -> {
-            // Exibe um dialog para editar a descrição
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Editar Atividade");
 
-            // Campo de texto para editar a descrição
             final EditText input = new EditText(context);
             input.setText(atividade.getDescricao());
             builder.setView(input);

@@ -20,11 +20,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Configurar a barra de navegação inferior
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
-        // Carregar o fragmento inicial
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
         }

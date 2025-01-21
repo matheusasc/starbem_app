@@ -4,7 +4,7 @@ public class Atividade {
 
     private int id;
     private String descricao;
-    private boolean concluida;  // Agora é um booleano
+    private boolean concluida;
 
     public Atividade(int id, String descricao, boolean concluida) {
         this.id = id;
@@ -32,7 +32,6 @@ public class Atividade {
         return concluida;
     }
 
-    // Método para atualizar o valor de 'concluida'
     public void setConcluida(boolean concluida) {
         this.concluida = concluida;
     }

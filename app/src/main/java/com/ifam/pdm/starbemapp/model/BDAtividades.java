@@ -18,30 +18,26 @@ public class BDAtividades extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Cria a tabela com a coluna 'concluida'
         String sql = "CREATE TABLE atividade (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "descricao TEXT NOT NULL, " +
-                "concluida INTEGER DEFAULT 0" + // Adicionando o campo 'concluida'
+                "concluida INTEGER DEFAULT 0" +
                 ")";
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Exclui a tabela atividade se ela existir
         db.execSQL("DROP TABLE IF EXISTS atividade");
 
-        // Cria a tabela novamente
         String sql = "CREATE TABLE atividade (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "descricao TEXT NOT NULL, " +
-                "concluida INTEGER DEFAULT 0" + // Adicionando a coluna 'concluida'
+                "concluida INTEGER DEFAULT 0" +
                 ")";
         db.execSQL(sql);
     }
 
-    // Método para excluir o banco de dados e forçar a recriação
     public void excluirBancoDeDados(Context context) {
         context.deleteDatabase(NOME_BANCO);
     }

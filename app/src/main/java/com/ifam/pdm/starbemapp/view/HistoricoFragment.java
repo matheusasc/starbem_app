@@ -35,13 +35,10 @@ public class HistoricoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflando o layout
         View view = inflater.inflate(R.layout.fragment_historico, container, false);
 
-        // Referenciando o PieChart
         pieChart = view.findViewById(R.id.pieChart);
 
-        // Atualizar o gráfico com base nas atividades
         atualizarGrafico();
 
         return view;
