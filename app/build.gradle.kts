@@ -39,6 +39,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.room.common)
     implementation(libs.cardview)
+    implementation (libs.hellocharts.library)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

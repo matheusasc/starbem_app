@@ -1,9 +1,10 @@
-package com.ifam.pdm.starbemapp;
+package com.ifam.pdm.starbemapp.model;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.ifam.pdm.starbemapp.model.BDAtividades;
 
@@ -19,24 +20,69 @@ public class AtividadeDao {
         db = bdAtividades.getWritableDatabase();
     }
 
-    public void inserirAtividade(String descricao) {
+    public void inserirAtividade(String descricao, boolean concluida) {
         ContentValues valores = new ContentValues();
         valores.put("descricao", descricao);
+        valores.put("concluida", concluida ? 1 : 0);
+
         db.insert("atividade", null, valores);
     }
 
-    public List<String> listarAtividades() {
-        List<String> atividades = new ArrayList<>();
+
+    public List<Atividade> listarAtividades() {
+        List<Atividade> atividades = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM atividade", null);
 
         if (cursor.moveToFirst()) {
             do {
-                String descricao = cursor.getString(cursor.getColumnIndex("descricao"));
-                atividades.add(descricao);
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                String descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
+                int concluidaInt = cursor.getInt(cursor.getColumnIndexOrThrow("concluida"));
+
+                // Converte o valor para booleano (true se 1, false se 0)
+                boolean concluida = (concluidaInt == 1);
+
+                Atividade atividade = new Atividade(id, descricao, concluida);
+                atividades.add(atividade);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
         return atividades;
     }
+
+
+    public void atualizarAtividade(int id, String novaDescricao) {
+        ContentValues valores = new ContentValues();
+        valores.put("descricao", novaDescricao);
+
+        db.update("atividade", valores, "id = ?", new String[]{String.valueOf(id)});
+    }
+
+    public void marcarComoConcluida(int id, boolean concluida) {
+        ContentValues valores = new ContentValues();
+        valores.put("concluida", concluida ? 1 : 0);
+
+        db.update("atividade", valores, "id = ?", new String[]{String.valueOf(id)});
+    }
+
+
+    public void alternarEstadoConcluida(int id) {
+        // Primeiro, obtemos o valor atual de 'concluida' da atividade
+        Cursor cursor = db.rawQuery("SELECT concluida FROM atividade WHERE id = ?", new String[]{String.valueOf(id)});
+        boolean concluida = false;
+
+        if (cursor.moveToFirst()) {
+            concluida = cursor.getInt(cursor.getColumnIndexOrThrow("concluida")) == 1;
+        }
+        cursor.close();
+
+        // Alterna o estado
+        ContentValues valores = new ContentValues();
+        valores.put("concluida", concluida ? 0 : 1);  // Se for 1 (concluída), setamos para 0 (não concluída), e vice-versa
+
+        db.update("atividade", valores, "id = ?", new String[]{String.valueOf(id)});
+    }
+
+
 }
