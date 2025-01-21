@@ -11,6 +11,8 @@
     <View
         android:id="@+id/containerComponents"
         style="@style/containerComponents"
+        android:layout_width="364dp"
+        android:layout_height="138dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,49 +30,6 @@
         android:textSize="38sp"
         app:layout_constraintStart_toStartOf="@+id/containerComponents"
         app:layout_constraintTop_toTopOf="@+id/containerComponents" />
-
-    <TextView
-        android:id="@+id/Pergunta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="88dp"
-        android:fontFamily="sans-serif-light"
-        android:text="Como está seu humor hoje?"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/containerComponents"
-        app:layout_constraintTop_toTopOf="@+id/containerComponents" />
-
-    <ImageButton
-        android:id="@+id/felicidade"
-        style="@style/emoteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="Selecionar Felicidade"
-        app:layout_constraintStart_toStartOf="@+id/containerComponents"
-        app:layout_constraintTop_toTopOf="@+id/containerComponents"
-        app:srcCompat="@drawable/sorriso" />
-
-    <ImageButton
-        android:id="@+id/tristeza"
-        style="@style/emoteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="Selecionar Tristeza"
-        app:layout_constraintStart_toEndOf="@+id/felicidade"
-        app:layout_constraintTop_toTopOf="@+id/containerComponents"
-        app:srcCompat="@drawable/soluco" />
-
-    <ImageButton
-        android:id="@+id/nervoso"
-        style="@style/emoteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="Selecionar Raiva"
-        app:layout_constraintStart_toEndOf="@+id/tristeza"
-        app:layout_constraintTop_toTopOf="@+id/containerComponents"
-        app:srcCompat="@drawable/nervoso" />
 
     <ImageButton
         android:id="@+id/btnAdicionarAtividades"
@@ -101,7 +60,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewAtividades"
         android:layout_width="360dp"
-        android:layout_height="265dp"
+        android:layout_height="385dp"
         android:layout_marginTop="16dp"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"

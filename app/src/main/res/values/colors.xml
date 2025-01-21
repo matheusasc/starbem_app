@@ -4,7 +4,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="linearClaro">#F3E5DF</color>
 
+    <color name="green_light">#BBDB9B</color>
+    <color name="blue_light">#9BDBCC</color>
 
+    // Cores do gráfico
+    <color name="green">#4CAF50</color>
+    <color name="red">#F44336</color>
 
     // Cores barra de navegação
     <color name="colorPrimary">#BB86FC</color>

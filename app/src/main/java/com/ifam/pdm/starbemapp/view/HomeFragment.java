@@ -1,4 +1,4 @@
-package com.ifam.pdm.starbemapp;
+package com.ifam.pdm.starbemapp.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.ifam.pdm.starbemapp.R;
+import com.ifam.pdm.starbemapp.adapter.AtividadeAdapter;
+import com.ifam.pdm.starbemapp.model.Atividade;
+import com.ifam.pdm.starbemapp.model.AtividadeDao;
 
 import java.util.List;
 
@@ -35,7 +40,6 @@ public class HomeFragment extends Fragment {
 
         atualizarLista();
 
-        // Alteração: Aqui você deve usar ImageButton em vez de Button
         ImageButton btnAdicionarAtividades = view.findViewById(R.id.btnAdicionarAtividades);
         btnAdicionarAtividades.setOnClickListener(v -> showAddActivityDialog());
 
@@ -55,10 +59,9 @@ public class HomeFragment extends Fragment {
                 .setPositiveButton("Adicionar", (dialog, which) -> {
                     String description = editTextActivityDescription.getText().toString().trim();
                     if (!description.isEmpty()) {
-                        // Salvar a atividade no banco de dados
-                        atividadeDao.inserirAtividade(description);
+                        boolean concluida = false;
+                        atividadeDao.inserirAtividade(description, concluida);
 
-                        // Atualizar a lista no RecyclerView
                         atualizarLista();
 
                         Toast.makeText(getContext(), "Atividade adicionada: " + description, Toast.LENGTH_SHORT).show();
@@ -72,7 +75,7 @@ public class HomeFragment extends Fragment {
 
 
     private void atualizarLista() {
-        List<String> atividades = atividadeDao.listarAtividades();
+        List<Atividade> atividades = atividadeDao.listarAtividades();
         adapter = new AtividadeAdapter(atividades, getContext());
         recyclerView.setAdapter(adapter);
     }
