@@ -1,4 +1,4 @@
-package com.ifam.pdm.starbemapp;
+package com.ifam.pdm.starbemapp.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ifam.pdm.starbemapp.R;
 import com.ifam.pdm.starbemapp.adapter.AtividadeAdapter;
+import com.ifam.pdm.starbemapp.model.Atividade;
 import com.ifam.pdm.starbemapp.model.AtividadeDao;
 
 import java.util.List;
@@ -58,8 +60,9 @@ public class HomeFragment extends Fragment {
                 .setPositiveButton("Adicionar", (dialog, which) -> {
                     String description = editTextActivityDescription.getText().toString().trim();
                     if (!description.isEmpty()) {
+                        boolean concluida = false;
                         // Salvar a atividade no banco de dados
-                        atividadeDao.inserirAtividade(description);
+                        atividadeDao.inserirAtividade(description, concluida);
 
                         // Atualizar a lista no RecyclerView
                         atualizarLista();
@@ -75,7 +78,7 @@ public class HomeFragment extends Fragment {
 
 
     private void atualizarLista() {
-        List<String> atividades = atividadeDao.listarAtividades();
+        List<Atividade> atividades = atividadeDao.listarAtividades();
         adapter = new AtividadeAdapter(atividades, getContext());
         recyclerView.setAdapter(adapter);
     }

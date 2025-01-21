@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.ifam.pdm.starbemapp.view.HistoricoFragment;
+import com.ifam.pdm.starbemapp.view.HomeFragment;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
