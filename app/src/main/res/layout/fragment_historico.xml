@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18dp"
                 android:textColor="@color/black"
-                android:text="Gráfico baseado em suas emoções semanais"/>
+                android:text="Gráfico baseado nas suas atividades concluídas/pendentes"/>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,8 @@ package com.ifam.pdm.starbemapp;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
+        Intent intent = getIntent();
 
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
