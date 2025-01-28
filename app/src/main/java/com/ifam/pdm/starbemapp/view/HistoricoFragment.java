@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -22,6 +23,7 @@ import lecho.lib.hellocharts.view.PieChartView;
 public class HistoricoFragment extends Fragment {
 
     private PieChartView pieChart;
+    private TextView textConcluida, textNaoConcluida; // Referências para os TextViews da legenda
 
     private AtividadeDao atividadeDao;
 
@@ -31,13 +33,14 @@ public class HistoricoFragment extends Fragment {
         atividadeDao = new AtividadeDao(getContext());
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_historico, container, false);
 
         pieChart = view.findViewById(R.id.pieChart);
+        textConcluida = view.findViewById(R.id.textConcluida); // Referência correta
+        textNaoConcluida = view.findViewById(R.id.textNaoConcluida); // Referência correta
 
         atualizarGrafico();
 
@@ -66,6 +69,10 @@ public class HistoricoFragment extends Fragment {
         float concluidoPercent = (total == 0) ? 0 : (atividadesConcluidas / total) * 100;
         float naoConcluidoPercent = 100 - concluidoPercent;
 
+        // Atualizar as legendas com as porcentagens
+        textConcluida.setText("Concluídas: " + Math.round(concluidoPercent) + "%");
+        textNaoConcluida.setText("Não Concluídas: " + Math.round(naoConcluidoPercent) + "%");
+
         // Criar os dados para o gráfico
         List<SliceValue> slices = new ArrayList<>();
         slices.add(new SliceValue(concluidoPercent, getResources().getColor(R.color.green)) // Porcentagem de atividades concluídas
@@ -77,6 +84,4 @@ public class HistoricoFragment extends Fragment {
         PieChartData pieChartData = new PieChartData(slices);
         pieChart.setPieChartData(pieChartData);
     }
-
-
 }

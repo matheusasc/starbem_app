@@ -3,12 +3,10 @@ package com.ifam.pdm.starbemapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
-import com.ifam.pdm.starbemapp.MainActivity;
-import com.ifam.pdm.starbemapp.R;
+import androidx.core.content.ContextCompat;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -16,6 +14,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.status_bar_color));
 
         EditText editTextUserName = findViewById(R.id.editTextUserName);
         Button buttonLogin = findViewById(R.id.buttonLogin);
