@@ -8,6 +8,7 @@
     android:id="@+id/main"
     tools:context=".MainActivity">
 
+
     <View
         android:id="@+id/containerComponents"
         style="@style/containerComponents"

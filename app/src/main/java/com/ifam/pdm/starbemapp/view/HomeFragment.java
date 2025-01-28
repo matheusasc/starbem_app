@@ -1,11 +1,13 @@
 package com.ifam.pdm.starbemapp.view;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,15 +36,21 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         atividadeDao = new AtividadeDao(getContext());
+        TextView textViewSaudacao = view.findViewById(R.id.Saudacao);
+
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("AppPrefs", requireContext().MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "Matheus");
+
+        textViewSaudacao.setText("Olá, " + userName);
 
         recyclerView = view.findViewById(R.id.recyclerViewAtividades);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         atualizarLista();
 
+
         ImageButton btnAdicionarAtividades = view.findViewById(R.id.btnAdicionarAtividades);
         btnAdicionarAtividades.setOnClickListener(v -> showAddActivityDialog());
-
 
         return view;
     }
