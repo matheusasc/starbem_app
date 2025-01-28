@@ -11,7 +11,7 @@
     app:cardCornerRadius="14dp"
     android:padding="16dp"
     android:id="@+id/cardAtividade"
-    android:backgroundTint="#BBDB9B">
+    android:backgroundTint="#e85d56">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:id="@+id/checkboxAtividade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@android:color/black"
+            android:buttonTint="#f5e9dd"
             android:layout_marginEnd="16dp" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:maxLines="2"
             android:paddingEnd="16dp"
             android:text="Descrição da atividade"
-            android:textColor="@android:color/black"
+            android:textColor="#f5e9dd"
             android:textSize="20sp" />
 
         <ImageView
