@@ -44,6 +44,19 @@
         app:layout_constraintTop_toBottomOf="@+id/containerComponents"
         app:srcCompat="@drawable/baseline_add_24" />
 
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Logout"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewAtividades" />
+
     <TextView
         android:id="@+id/textButton"
         android:layout_width="wrap_content"

@@ -1,10 +1,12 @@
 package com.ifam.pdm.starbemapp.view;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ifam.pdm.starbemapp.LoginActivity;
 import com.ifam.pdm.starbemapp.R;
 import com.ifam.pdm.starbemapp.adapter.AtividadeAdapter;
 import com.ifam.pdm.starbemapp.model.Atividade;
@@ -48,12 +51,26 @@ public class HomeFragment extends Fragment {
 
         atualizarLista();
 
-
         ImageButton btnAdicionarAtividades = view.findViewById(R.id.btnAdicionarAtividades);
         btnAdicionarAtividades.setOnClickListener(v -> showAddActivityDialog());
 
+        // Configurar o botão de logout
+        Button buttonLogout = view.findViewById(R.id.buttonLogout);
+        buttonLogout.setOnClickListener(v -> {
+            // Limpar os dados de login
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+
+            // Redirecionar para a LoginActivity
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
+        });
+
         return view;
     }
+
 
     private void showAddActivityDialog() {
         LayoutInflater inflater = LayoutInflater.from(getContext());

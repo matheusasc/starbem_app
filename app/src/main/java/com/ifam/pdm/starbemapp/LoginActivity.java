@@ -15,6 +15,20 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Verificar se o usuário já está logado
+        SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            // Usuário já está logado, vá direto para a MainActivity
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return; // Impedir que o restante do código seja executado
+        }
+
+        // Exibir a tela de login
         setContentView(R.layout.activity_login);
 
         EditText editTextUserName = findViewById(R.id.editTextUserName);
@@ -23,10 +37,10 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(view -> {
             String userName = editTextUserName.getText().toString();
             if (!userName.isEmpty()) {
-                // Armazenar o nome em SharedPreferences
-                SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+                // Salvar o nome do usuário e marcar o login como feito
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("userName", userName);
+                editor.putString("userName", userName); // Salva o nome do usuário
+                editor.putBoolean("isLoggedIn", true); // Marca como logado
                 editor.apply();
 
                 // Ir para a MainActivity
