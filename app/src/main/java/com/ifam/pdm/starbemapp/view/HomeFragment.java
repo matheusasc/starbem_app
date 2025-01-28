@@ -144,6 +144,29 @@ public class HomeFragment extends Fragment {
                 .show();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == getActivity().RESULT_OK && data != null) {
+            try {
+                // Obtém a imagem escolhida
+                Bitmap selectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                imgProfile.setImageBitmap(selectedImage);
+
+                // Salva a imagem escolhida
+                ProfileImageManager.saveProfileImage(selectedImage, getContext());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getContext(), "Erro ao selecionar imagem.", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        loadProfileImage();
+    }
+
+
     private void atualizarLista() {
         List<Atividade> atividades = atividadeDao.listarAtividades();
         adapter = new AtividadeAdapter(atividades, getContext());
