@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,26 +17,26 @@ public class AtividadeDao {
         db = bdAtividades.getWritableDatabase();
     }
 
+    // Inserir uma nova atividade no banco
     public void inserirAtividade(String descricao, boolean concluida) {
         ContentValues valores = new ContentValues();
         valores.put("descricao", descricao);
         valores.put("concluida", concluida ? 1 : 0);
-
         db.insert("atividade", null, valores);
     }
 
-
+    // Listar atividades ordenando para que as concluídas fiquem no final
     public List<Atividade> listarAtividades() {
         List<Atividade> atividades = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT * FROM atividade", null);
+
+        // Agora ordenamos as tarefas: primeiro as não concluídas, depois as concluídas
+        Cursor cursor = db.rawQuery("SELECT * FROM atividade ORDER BY concluida ASC", null);
 
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
                 String descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
-                int concluidaInt = cursor.getInt(cursor.getColumnIndexOrThrow("concluida"));
-
-                boolean concluida = (concluidaInt == 1);
+                boolean concluida = cursor.getInt(cursor.getColumnIndexOrThrow("concluida")) == 1;
 
                 Atividade atividade = new Atividade(id, descricao, concluida);
                 atividades.add(atividade);
@@ -46,37 +47,27 @@ public class AtividadeDao {
         return atividades;
     }
 
-
+    // Atualizar descrição da atividade
     public void atualizarAtividade(int id, String novaDescricao) {
         ContentValues valores = new ContentValues();
         valores.put("descricao", novaDescricao);
-
         db.update("atividade", valores, "id = ?", new String[]{String.valueOf(id)});
     }
 
+    // Atualizar estado concluída da atividade
     public void marcarComoConcluida(int id, boolean concluida) {
         ContentValues valores = new ContentValues();
         valores.put("concluida", concluida ? 1 : 0);
-
         db.update("atividade", valores, "id = ?", new String[]{String.valueOf(id)});
     }
 
-
+    // Alternar estado concluída/não concluída
     public void alternarEstadoConcluida(int id) {
         Cursor cursor = db.rawQuery("SELECT concluida FROM atividade WHERE id = ?", new String[]{String.valueOf(id)});
-        boolean concluida = false;
-
         if (cursor.moveToFirst()) {
-            concluida = cursor.getInt(cursor.getColumnIndexOrThrow("concluida")) == 1;
+            boolean concluida = cursor.getInt(cursor.getColumnIndexOrThrow("concluida")) == 1;
+            marcarComoConcluida(id, !concluida);
         }
         cursor.close();
-
-        // Alterna o estado
-        ContentValues valores = new ContentValues();
-        valores.put("concluida", concluida ? 0 : 1);
-
-        db.update("atividade", valores, "id = ?", new String[]{String.valueOf(id)});
     }
-
-
 }
